@@ -49,6 +49,10 @@ Most requests use 2–4 agents. Complex business reviews use the full loop.
 | Promo proposal | Data Validator → Promo Planner → Finance Analyst → Account Strategist → QA Reviewer | Forecast Planner | Promo plan + ROI + buyer ask |
 | Sales performance review | Data Validator → Sales Analyst → QA Reviewer → Management Reviewer | Forecast Planner | Sales report + root cause |
 | DOH / inventory risk only | Data Validator → Inventory Risk → QA Reviewer | Forecast Planner | Risk report + depletion action |
+| Reply to incoming email | Email Assistant (triage → request missing info) → QA Reviewer | Sales Analyst, Finance Analyst | Send-ready reply + pre-send checklist |
+| Draft / revise email | Email Assistant → QA Reviewer | Account Strategist, Finance Analyst | Send-ready email draft |
+| Business review deck | Data Validator → Sales Analyst → Inventory Risk → Finance Analyst → Dashboard Builder → Presentation Builder → QA Reviewer → Management Reviewer | Forecast Planner, Account Strategist | Template-faithful .pptx deck |
+| Buyer presentation deck | Data Validator → Sales Analyst → Account Strategist → Dashboard Builder → Presentation Builder → QA Reviewer → Management Reviewer | Promo Planner, Finance Analyst | Account-specific .pptx deck |
 
 ---
 
@@ -76,6 +80,10 @@ Most requests use 2–4 agents. Complex business reviews use the full loop.
 
 **Management Reviewer** — makes the final output executive-ready before delivery.
 
+**Email Assistant** — run when the request involves drafting, replying to, or revising a commercial email. For replies, triages the incoming email for missing information and requests it before drafting. Matches the source email's language and adapts tone to the recipient.
+
+**Presentation Builder** — run when the request involves building or updating a PowerPoint deck (business review, buyer presentation, category deck). Enforces template fidelity: Mode A (strict, e.g. Energizer Monthly Business Review — content + layout only) or Mode B (DKSH branded — colors locked, design free).
+
 ---
 
 ## Agent Handoff Rules
@@ -91,6 +99,9 @@ Most requests use 2–4 agents. Complex business reviews use the full loop.
 | Account Strategist | Dashboard Builder | Slide storyline and required visuals |
 | Finance Analyst | Management Reviewer | ROI validation, TI approval status |
 | QA Reviewer | Management Reviewer | QA score and any revision flags |
+| Email Assistant | Sales / Finance / Account Strategist | Requests data, pricing, or account strategy needed to complete an email |
+| Presentation Builder | Dashboard Builder | Requests specific charts/visuals to embed in the deck |
+| Presentation Builder | QA Reviewer → Management Reviewer | Completed deck for check and executive polish |
 
 ---
 
@@ -162,6 +173,14 @@ If revision is flagged, fix it before delivering. Never deliver with known QA is
 **Run as the final step before output.**
 Makes every output executive-ready: tightens language, elevates key message, ensures financial consequence is clear, confirms the right action is front and center.
 **Output:** Final version ready for senior stakeholder or buyer.
+
+### Email Assistant
+See `EMAIL_ASSISTANT.md`
+Drafts, replies to, and revises commercial emails — bilingual (matches source language), tone adapted to recipient (principal / buyer / internal / vendor). For replies, triages the incoming email for missing information and requests it before producing a send-ready draft. Embeds data tables and file references; never invents figures or sends/attaches autonomously.
+
+### Presentation Builder
+See `PRESENTATION_BUILDER.md`
+Builds template-faithful PowerPoint decks. Mode A (strict templates like Energizer Monthly Business Review — edits content + layout only, follows per-page context guide) or Mode B (DKSH branded — brand colors locked, design otherwise free). Never invents data; flags gaps where content doesn't fit the template.
 
 ---
 

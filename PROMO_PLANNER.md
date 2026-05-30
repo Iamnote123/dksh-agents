@@ -89,6 +89,22 @@ Use this agent when the request involves:
 
 ---
 
+## Workflow
+
+1. Confirm Data Validator has cleared the input files.
+2. Define the promo objective (from the objectives table) — every promo needs one clear goal.
+3. Check the trigger: is this for excess depletion, sell-out recovery, NPD, defense, or trial?
+4. Pull baseline IMS from recent non-promo period for each target SKU.
+5. Select the mechanic using the mechanic selection logic, respecting retailer constraints.
+6. Estimate expected uplift % with a stated basis (history / mechanic standard / judgment).
+7. Calculate incremental IMS, promo sales, and TI cost.
+8. Run the validation checklist — confirm stock availability and retailer lead time.
+9. Build the 4–12 week promo calendar aligned to retailer windows.
+10. Send TI cost and uplift assumptions to Finance Analyst for ROI validation.
+11. Send uplift % to Forecast Planner for LE revision; send mechanic to Account Strategist for buyer narrative.
+
+---
+
 ## Output Format
 
 **1. Promo Recommendation Summary**

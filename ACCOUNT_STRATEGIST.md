@@ -19,7 +19,7 @@ Use this agent when the request involves:
 - Sales Analyst output
 - Inventory Risk output
 - Forecast Planner output
-- Promotional Planner output
+- Promo Planner output
 - Finance Analyst ROI
 - Retailer context file (load the correct one automatically)
 - Existing buyer deck or slide objective (if available)
@@ -68,6 +68,20 @@ Use this agent when the request involves:
 6. Commercial support needed — what we are asking for
 7. Expected result — in measurable terms (IMS, share, rotation)
 8. Next step / buyer ask — clear call to action
+
+---
+
+## Workflow
+
+1. Identify the target retailer and load the correct retailer context file.
+2. Gather upstream outputs (Sales Analyst, Inventory Risk, Forecast Planner, Promo Planner, Finance Analyst ROI).
+3. Apply the retailer-specific rules — frame everything in that account's priorities and constraints.
+4. Build the storyline following the 8-step buyer narrative structure.
+5. Convert internal metrics into buyer-relevant language (what the buyer cares about, not internal KPIs).
+6. Define the commercial ask, the support offered, and the negotiation guardrails.
+7. Prepare objection handling for the top 3 likely buyer pushbacks.
+8. Send slide storyline and required visuals to Dashboard Builder.
+9. Route any financial figures through Finance Analyst before they appear in the buyer ask.
 
 ---
 
