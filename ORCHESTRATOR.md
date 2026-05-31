@@ -51,6 +51,8 @@ Most requests use 2–4 agents. Complex business reviews use the full loop.
 | DOH / inventory risk only | Data Validator → Inventory Risk → QA Reviewer | Forecast Planner | Risk report + depletion action |
 | Reply to incoming email | Email Assistant (triage → request missing info) → QA Reviewer | Sales Analyst, Finance Analyst | Send-ready reply + pre-send checklist |
 | Draft / revise email | Email Assistant → QA Reviewer | Account Strategist, Finance Analyst | Send-ready email draft |
+| Save output to Obsidian | Management Reviewer → Obsidian Bridge | — | Saved .md note in DKSH-Brain vault |
+| Excel dashboard / tracker | Data Validator → [relevant analysis agents] → Excel Agent | QA Reviewer | Ready-to-open .xlsx with formulas |
 | Business review deck | Data Validator → Sales Analyst → Inventory Risk → Finance Analyst → Dashboard Builder → Presentation Builder → QA Reviewer → Management Reviewer | Forecast Planner, Account Strategist | Template-faithful .pptx deck |
 | Buyer presentation deck | Data Validator → Sales Analyst → Account Strategist → Dashboard Builder → Presentation Builder → QA Reviewer → Management Reviewer | Promo Planner, Finance Analyst | Account-specific .pptx deck |
 
@@ -82,6 +84,10 @@ Most requests use 2–4 agents. Complex business reviews use the full loop.
 
 **Email Assistant** — run when the request involves drafting, replying to, or revising a commercial email. For replies, triages the incoming email for missing information and requests it before drafting. Matches the source email's language and adapts tone to the recipient.
 
+**Obsidian Bridge** — run when any final output should be saved to the DKSH-Brain vault, or when retrieving past analysis from the vault. Runs after Management Reviewer delivers the final output.
+
+**Excel Agent** — run when the request involves building or updating an Excel file (IMS/NIS tracker, DOH monitor, business review dashboard). Pushes validated agent output into .xlsx with formulas, DKSH color scheme, and zero formula errors.
+
 **Presentation Builder** — run when the request involves building or updating a PowerPoint deck (business review, buyer presentation, category deck). Enforces template fidelity: Mode A (strict, e.g. Energizer Monthly Business Review — content + layout only) or Mode B (DKSH branded — colors locked, design free).
 
 ---
@@ -100,6 +106,8 @@ Most requests use 2–4 agents. Complex business reviews use the full loop.
 | Finance Analyst | Management Reviewer | ROI validation, TI approval status |
 | QA Reviewer | Management Reviewer | QA score and any revision flags |
 | Email Assistant | Sales / Finance / Account Strategist | Requests data, pricing, or account strategy needed to complete an email |
+| Excel Agent | QA Reviewer → Management Reviewer | Completed .xlsx for delivery |
+| Obsidian Bridge | — | Terminal node — saves to vault, nothing to pass on |
 | Presentation Builder | Dashboard Builder | Requests specific charts/visuals to embed in the deck |
 | Presentation Builder | QA Reviewer → Management Reviewer | Completed deck for check and executive polish |
 
@@ -177,6 +185,14 @@ Makes every output executive-ready: tightens language, elevates key message, ens
 ### Email Assistant
 See `EMAIL_ASSISTANT.md`
 Drafts, replies to, and revises commercial emails — bilingual (matches source language), tone adapted to recipient (principal / buyer / internal / vendor). For replies, triages the incoming email for missing information and requests it before producing a send-ready draft. Embeds data tables and file references; never invents figures or sends/attaches autonomously.
+
+### Obsidian Bridge
+See `OBSIDIAN_BRIDGE.md`
+Saves all final outputs to the DKSH-Brain Obsidian vault as structured .md notes with frontmatter, tags, and wikilinks. Retrieves past analysis on request. Runs after Management Reviewer.
+
+### Excel Agent
+See `EXCEL_AGENT.md`
+Builds and updates Excel workbooks (.xlsx) — IMS/NIS trackers, DOH monitors, forecast tables, business review dashboards. Uses Excel formulas (not hardcoded values), DKSH color scheme, and delivers with zero formula errors.
 
 ### Presentation Builder
 See `PRESENTATION_BUILDER.md`
