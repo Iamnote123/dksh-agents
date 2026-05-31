@@ -2,6 +2,8 @@
 # ============================================================
 # Master Installer — All Tools
 # Claude Code Agents + Data Viz + BI
+# Usage (from repo):  bash install_all.sh
+# Usage (remote):     curl -fsSL https://raw.githubusercontent.com/Iamnote123/dksh-agents/main/install_all.sh | bash
 # ============================================================
 
 set -e
@@ -12,6 +14,9 @@ ok()   { echo -e "  ${GREEN}✓${NC} $1"; }
 warn() { echo -e "  ${YELLOW}!${NC} $1"; }
 fail() { echo -e "  ${RED}✗${NC} $1"; }
 head() { echo -e "\n${BOLD}${CYAN}── $1 ──${NC}"; }
+
+# Resolve script directory (empty when piped via curl)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-}")" 2>/dev/null && pwd || echo "")"
 
 echo ""
 echo -e "${CYAN}╔══════════════════════════════════════╗${NC}"
@@ -25,19 +30,41 @@ head "1/5  DKSH Commercial AI Agents"
 DKSH_DIR="$HOME/.claude/skills/dksh-commercial-ai"
 mkdir -p "$DKSH_DIR/references"
 
+DKSH_FILES=("ORCHESTRATOR.md" "DATA_VALIDATOR.md" "SALES_ANALYST.md" "FORECAST_PLANNER.md"
+  "INVENTORY_RISK.md" "ORDERING_PLANNER.md" "PROMO_PLANNER.md" "FINANCE_ANALYST.md"
+  "ACCOUNT_STRATEGIST.md" "DASHBOARD_BUILDER.md" "QA_REVIEWER.md" "MANAGEMENT_REVIEWER.md"
+  "EMAIL_ASSISTANT.md" "PRESENTATION_BUILDER.md" "OBSIDIAN_BRIDGE.md" "EXCEL_AGENT.md")
+
 DKSH_BASE="https://raw.githubusercontent.com/Iamnote123/dksh-agents/main"
-DKSH_FILES=("ORCHESTRATOR.md" "DATA_VALIDATOR.md" "SALES_ANALYST.md" "FORECAST_PLANNER.md" "INVENTORY_RISK.md" "ORDERING_PLANNER.md" "PROMO_PLANNER.md" "FINANCE_ANALYST.md" "ACCOUNT_STRATEGIST.md" "DASHBOARD_BUILDER.md" "QA_REVIEWER.md" "MANAGEMENT_REVIEWER.md" "EMAIL_ASSISTANT.md" "PRESENTATION_BUILDER.md" "OBSIDIAN_BRIDGE.md" "EXCEL_AGENT.md")
 
-for f in "${DKSH_FILES[@]}"; do
-  if curl -fsSL "$DKSH_BASE/$f" -o "$DKSH_DIR/$f" 2>/dev/null; then
-    ok "$f"
+# Use local disk when repo files are present alongside this script
+if [ -n "$SCRIPT_DIR" ] && [ -f "$SCRIPT_DIR/ORCHESTRATOR.md" ]; then
+  echo -e "  ${CYAN}source: local disk ($SCRIPT_DIR)${NC}"
+  for f in "${DKSH_FILES[@]}"; do
+    if cp "$SCRIPT_DIR/$f" "$DKSH_DIR/$f" 2>/dev/null; then
+      ok "$f"
+    else
+      fail "$f — file not found in $SCRIPT_DIR"
+    fi
+  done
+  if [ -f "$SCRIPT_DIR/references/context.md" ]; then
+    cp "$SCRIPT_DIR/references/context.md" "$DKSH_DIR/references/context.md" && ok "references/context.md"
   else
-    fail "$f — check repo is Public"
+    warn "references/context.md not found locally — skip"
   fi
-done
-
-curl -fsSL "$DKSH_BASE/references/context.md" -o "$DKSH_DIR/references/context.md" 2>/dev/null \
-  && ok "references/context.md" || warn "context.md not found — skip"
+else
+  echo -e "  ${CYAN}source: GitHub${NC}"
+  command -v curl &>/dev/null || { fail "curl not found"; exit 1; }
+  for f in "${DKSH_FILES[@]}"; do
+    if curl -fsSL "$DKSH_BASE/$f" -o "$DKSH_DIR/$f" 2>/dev/null; then
+      ok "$f"
+    else
+      fail "$f — check repo is Public"
+    fi
+  done
+  curl -fsSL "$DKSH_BASE/references/context.md" -o "$DKSH_DIR/references/context.md" 2>/dev/null \
+    && ok "references/context.md" || warn "context.md not found — skip"
+fi
 
 # ── 2. Agency Agents (Claude Code) ─────────────────────────
 head "2/5  Agency Agents (147 agents for Claude Code)"
