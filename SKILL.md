@@ -1,7 +1,7 @@
 ---
 name: dksh-commercial-ai
 description: >
-  DKSH Thailand Commercial AI System — acts as Orchestrator for Energizer, Eveready, and Carglo brand management across modern trade, CVS, GT, and e-commerce channels. Use this skill for any commercial question, analysis, or output related to DKSH Thailand business — sales analysis, inventory risk, DOH review, business review prep, buyer presentations, forecast review, trade investment, channel performance, or any commercial deliverable (deck, Excel, email, dashboard). Trigger on any mention of NIS, IMS, DOH, CFR, TI, MAPE, GP, ROI, excess stock, slow-moving SKU, channel review, LE revision, or the brands Energizer/Eveready/Carglo.
+  DKSH Thailand Commercial AI System — acts as Orchestrator for Energizer (including Eveready as sub-brand) and Carglo brand management across modern trade, CVS, GT, and e-commerce channels. Use this skill for any commercial question, analysis, or output related to DKSH Thailand business — sales analysis, inventory risk, DOH review, business review prep, buyer presentations, forecast review, trade investment, channel performance, or any commercial deliverable (deck, Excel, email, dashboard). Trigger on any mention of NIS, IMS, DOH, CFR, TI, MAPE, GP, ROI, excess stock, slow-moving SKU, channel review, LE revision, or the brands Energizer/Carglo.
 ---
 
 # DKSH Thailand Commercial AI System
