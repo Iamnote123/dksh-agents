@@ -34,13 +34,27 @@ For locked corporate templates where the format is mandated.
 
 ### Mode B — DKSH Branded (general DKSH decks)
 
-For DKSH-owned decks that follow brand guidelines but allow design freedom.
+For DKSH-owned decks. The official DKSH Office template has been baked into a real slide-master
+template file — BUILD ON IT, do not hand-roll the brand.
 
-- **Locked:** Brand colors must follow the DKSH color guide.  
-- **Editable:** Layout, slide count, structure, content — normal design freedom within brand colors.  
-- **Rule:** Stay on-brand (colors), but otherwise build what best tells the story.
+- Template file: `Context/templates/dksh_brand/DKSH_Template.pptx` (builder base) and
+  `DKSH_Template.potx` (PowerPoint File > New). It carries the DKSH slide master + 33 layouts +
+  theme + logo.
+- Build with the helper module `scripts/dksh_brand_template.py`. `new_deck()` opens the template,
+  so the logo (top-right), cyan edge bar, deep-red blocks, chapter/title/footer/page-number
+  furniture, Arial, and palette are INHERITED from the master — the builders just fill placeholders:
+  `add_title_slide()` (photo optional), `add_content_slide()` (returns the content area to draw
+  into), `add_section_divider()`, `add_thankyou_slide()`, plus `COLORS` and `add_logo()`.
+- Full spec / placeholder map: read `Context/templates/dksh-brand-template-guide.md` before building.
+- Front/title page = cyan #00B3D8 bar + deep-red field (or photo) + white title/subtitle/date +
+  white DKSH logo + "Delivering Growth - in Asia and Beyond." tagline.
+- Editable: chart/card/table content inside the content area, slide count, story order. The brand
+  shell is fixed by the master.
+- This is the DEFAULT for everything except the Energizer MBR (Mode A). No need to ask the mode.
 
-If the template type is unclear, ask which mode applies before building.
+Validated reference output: `Outputs/DKSH_Brand_Template_Sample.pptx`. Always render to PNG
+(PowerPoint COM, from a LOCAL temp copy — the OneDrive path triggers a modal dialog) and eyeball
+before delivering.
 
 ---
 
@@ -48,17 +62,23 @@ If the template type is unclear, ask which mode applies before building.
 
 *Extracted from the official DKSH PowerPoint master template (theme1.xml).*
 
+RED RULE (user-confirmed): DEEP red `#BE0028` is the DEFAULT brand red — titles, front page,
+section dividers, closing, branded UI (`COLORS["red"]`). VIVID red `#EF233C` is for CHARTS &
+GRAPHS ONLY — chart series, KPI figures, data emphasis (`COLORS["red_vivid"]`). Never use vivid
+red for titles or page furniture. (Both are already baked into the master template.)
+
 | Use | Color | Hex |
 | :---- | :---- | :---- |
-| **Primary — DKSH Red** | Brand red (titles, key accent) | `#BE0028` |
-| **Bright Red** | Highlight / link accent | `#EF233C` |
-| **Text Dark 1** | Body text dark | `#1A1A1A` |
-| **Text Gray 2** | Chapter / footer text | `#98989A` |
-| **White** | Background / reverse text | `#FFFFFF` |
-| **Light Gray** | Subtle fill / divider | `#EBEBEB` |
-| **Mid Gray** | Secondary fill | `#CACACA` |
+| Primary — DKSH Red (DEFAULT) | Titles, front page, dividers, closing, key accent | `#BE0028` |
+| Vivid Red — CHARTS & GRAPHS ONLY | Chart series, KPI figures, data emphasis | `#EF233C` |
+| Text Dark 1 | Body text dark | `#1A1A1A` |
+| Text Gray 2 | Chapter / footer text | `#98989A` |
+| White | Background / reverse text | `#FFFFFF` |
+| Light Gray | Subtle fill / divider | `#EBEBEB` |
+| Mid Gray | Secondary fill | `#CACACA` |
 
-**Chart / diagram accent colors** (from master — use these when charting): | Family | Light | Mid | Dark | |---|---|---|---| | Blue | `#90E0EF` | `#00B3D8` | `#0077B6` | | Teal | `#4BD2D2` | `#008787` | `#005F5F` | | Amber/Orange | `#FFDC64` | `#FF9614` | `#FF6E32` |
+Chart / diagram accent colors (from theme — use these when charting): Blue `#90E0EF` / `#00B3D8` /
+`#0077B6`, Teal `#008787`. Do NOT use navy+orange (off-brand).
 
 **Font:** Arial (do not change — DKSH standard)
 

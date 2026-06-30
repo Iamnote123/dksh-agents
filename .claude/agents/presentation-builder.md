@@ -61,12 +61,29 @@ actual .pptx before editing.
 
 ### Mode B — DKSH Branded (general DKSH decks)
 
-For DKSH-owned decks. Free design, but always built ON the DKSH template — not a blank deck.
+For DKSH-owned decks. Free design, applying the official DKSH brand template.
 
-- Base: Build on the DKSH PowerPoint template/theme (theme reference: `Data/Energizer_Eveready/99_raw_uploads/Color Guide DKSH.pptx`). Use its slide master, theme colors, and Arial font as the foundation of every deck.
-- Locked: DKSH brand colors and Arial font (per the DKSH color guide). Stay on the DKSH theme — every deck must look like a DKSH deck.
-- Editable: Layout, slide count, slide structure, and content — full design freedom WITHIN the DKSH template.
-- Rule: Free design under the DKSH template. Decide the structure/layout that best tells the story, but the brand frame (DKSH master, colors, fonts) is fixed.
+- IMPORTANT: the official DKSH Office template has been extracted from `Color Guide DKSH.pptx` and
+  baked into a real slide-master template file: `Context/templates/dksh_brand/DKSH_Template.pptx`
+  (+ `.potx` for PowerPoint File > New). Before building any Mode B deck, READ
+  `Context/templates/dksh-brand-template-guide.md` and BUILD WITH the helper module
+  `scripts/dksh_brand_template.py`. `new_deck()` opens the template, so the logo (top-right), cyan
+  bar, deep-red blocks, chapter/title/footer/page-number furniture, Arial, and palette are INHERITED
+  from the master — the builders just fill placeholders. Helpers: `new_deck()`, `add_title_slide()`
+  (photo optional), `add_content_slide()` (returns the content area to draw into), `add_section_divider()`,
+  `add_thankyou_slide()`, plus `COLORS` and `add_logo()`. Do NOT hand-roll colors, fonts, or furniture.
+- Locked (fixed constraints, enforced by the helper):
+  - Theme palette from the .pptx theme XML. RED RULE (user-confirmed): DEEP red `#BE0028` is the
+    DEFAULT brand red — titles, front page, dividers, closing, logo strip (`COLORS["red"]`).
+    VIVID red `#EF233C` is for CHARTS & GRAPHS ONLY — chart series, KPI figures, data emphasis
+    (`COLORS["red_vivid"]`). Plus text `#1A1A1A`, gray `#98989A`, chart accents `#90E0EF / #00B3D8 / #0077B6`, teal `#008787` (Carglo).
+  - Arial font throughout.
+  - DKSH logo TOP-RIGHT on every slide at (11.34", 0.40"), 1.59 x 0.50 in — asset
+    `Context/templates/dksh_brand/assets/dksh_logo.png`.
+  - Slide scaffold: chapter eyebrow (8pt gray) + title (26pt red) + footer + page number.
+  - Front/title page (matches the guideline deck): CYAN #00B3D8 bar at the left edge + photo/red band + deep-red right block with WHITE title/subtitle/date + "Delivering Growth - in Asia and Beyond." tagline + WHITE logo top-right.
+- Editable: chart/card/table content inside the content area, slide count, story order, which layouts to use. Full design freedom for the content; the brand shell is fixed.
+- Rule: build the brand shell with the helper, then tell the story inside the content area.
 
 This is the default for everything except the Energizer MBR. No need to ask the mode.
 
@@ -81,24 +98,44 @@ Build visual, business-led slides — not text documents.
 #### Premium visual finish (user-confirmed: "beautiful, high-level deck")
 Mode B decks must look board-grade — soft shadows, card layouts, icons, big numbers, white space.
 Before building any Mode B deck, READ `Context/templates/premium-deck-techniques.md` — it has the
-working python-pptx helper code (soft outer-shadow XML injection, KPI cards, icon chips) plus the
-quality gate. Key points:
+working python-pptx helper code (soft outer-shadow XML injection, KPI cards, icon chips, donut ring,
+chevron flow, delta markers) plus the quality gate. Key points:
 - python-pptx native shadow only toggles inheritance; real soft shadows are injected as OOXML (a:outerShdw). Use the add_soft_shadow helper — grey, soft, never black.
-- Icons must be PNG (SVG fails via PIL); use ONE consistent icon style throughout, stored in `Context/templates/icons/`.
-- Lead with KPI cards (rounded rectangle + soft shadow + big bold number + label) for headline figures.
+- Icons must be PNG (SVG fails via PIL); use ONE consistent icon family throughout, from `Context/templates/icons/` (flat / red / white / duotone + bullets / months / delta).
+- Lead with KPI cards (rounded rect + soft shadow + centered duotone icon + big bold number + label + centered delta line). Put a green/red delta on every comparative number.
 - Card-based layout, generous white space, charts clean (no 3D/heavy gridlines), Arial, DKSH brand colors.
-- Run the quality gate in that file before delivering.
+- Run the quality gate before delivering.
+
+#### Mode B STARTER LAYOUT (validated reference)
+Start every Mode B deck from the brand template helper, then drop premium content into the content area:
+- Brand shell: `scripts/dksh_brand_template.py` (title page, content scaffold, section divider, thank-you, logo top-right)  ·  Validated output: `Outputs/DKSH_Brand_Template_Sample.pptx`
+- Premium content blocks (KPI cards / donut / chevron) inside the content area: `scripts/build_sample_deck.py`  ·  Output: `Outputs/Premium_Deck_Sample.pptx` (+ `.png` preview)
+- Layout (16:9): red top accent bar → duotone section-icon chip + insight title (states the conclusion) + subtitle → row of 4 KPI cards (icon + number + label + delta) → bottom row = donut achievement ring (left) + full-width chevron action flow (right) + status pill → footer divider.
+- Render-to-check workflow (always verify visually before delivering): export slide 1 to PNG via PowerPoint COM, then look at it. See the build script's export block.
+
+#### Defects to avoid (learned from review — check every Mode B slide)
+- No square-cornered strips/bars sitting on rounded cards (square nubs poke out). Use a centered icon or a rounded/inset accent instead.
+- Center delta markers/notes under the number; do not left-align in an oversized box. Inline colored ▲/▼ text is cleanest.
+- Donut centre label must sit inside the hole, not clip the ring.
+- Balance composition — no large dead zone on one side; extend flows/charts to fill width or rebalance.
+- Insight title states the CONCLUSION, not the topic.
+- "Board-grade" needs content rigor too: only use validated figures; a clean shell with weak numbers is not board-ready. Mark any illustrative/sample figures clearly.
 
 ---
 
 ## DKSH Color Guide
 
+Full authoritative spec (palette from theme XML, fonts, logo placement, front page,
+section divider, all 33 layouts): `Context/templates/dksh-brand-template-guide.md`.
+The table below is the quick reference; the helper `scripts/dksh_brand_template.py`
+applies all of it automatically.
+
 Per the DKSH brand guide (user-confirmed):
 
 | Use | Color | Hex |
 |---|---|---|
-| Primary — DKSH Red | Brand red (titles, key accent) | #EF233C (user-confirmed primary) |
-| Secondary Red | Deep red accent | #BE0028 |
+| Primary — DKSH Red (DEFAULT) | Brand red — titles, front page, dividers, closing, key UI accent | #BE0028 (deep, user-confirmed default 2026-06-30) |
+| Vivid Red — CHARTS & GRAPHS ONLY | Chart series, KPI figures, data emphasis | #EF233C (do NOT use for titles/UI) |
 | Text Dark | Body text dark | #1A1A1A |
 | Text Gray | Chapter / footer text | #98989A |
 | White | Background / reverse text | #FFFFFF |
